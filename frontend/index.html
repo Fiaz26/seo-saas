@@ -57,16 +57,11 @@ async function login() {
   // store API key
   localStorage.setItem("apiKey", data.api_key);
 
-  alert("Login successful");
-}
-
-
+  alert("Login successful")
 const BASE_URL = "https://fiaz26seo-saas-production.up.railway.app";
 
 function getInput() {
-  return document.getElementById("inputBox").value;
-}
-
+  return document.getElementById("inputBox")
 function getApiKey() {
   return localStorage.getItem("apiKey");
 }
