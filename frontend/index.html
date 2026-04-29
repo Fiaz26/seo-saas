@@ -68,14 +68,22 @@ function getApiKey() {
 
 async function generateBlog() {
   const topic = getInput();
-  const res = await fetch(`${BASE_URL}/ai/blog?topic=${topic}`);
+  const res = await fetch(`${BASE_URL}/ai/blog?topic=${topic}`, {
+  headers: {
+    "x-api-key": localStorage.getItem("apiKey")
+  }
+})
   const data = await res.json();
   document.getElementById("output").innerText = JSON.stringify(data, null, 2);
 }
 
 async function getKeywords() {
   const keyword = getInput();
-  const res = await fetch(`${BASE_URL}/ai/keywords?query=${keyword}`);
+  const res = await fetch(`${BASE_URL}/ai/keywords?topic=${topic}`, {
+  headers: {
+    "x-api-key": localStorage.getItem("apiKey")
+  }
+})
   const data = await res.json();
   document.getElementById("output").innerText = JSON.stringify(data, null, 2);
 }
