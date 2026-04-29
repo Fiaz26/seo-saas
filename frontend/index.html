@@ -1,13 +1,91 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SEO SaaS AI Engine</title>
+</head>
+
+<body>
+
+<h1>SEO SaaS AI Engine</h1>
+<h2>Login</h2>
+
+<input id="email" placeholder="Email" />
+<input id="password" type="password" placeholder="Password" />
+
+<br><br>
+
+<button onclick="login()">Login</button>
+
+<hr>
+
+<!-- INPUT FIELD -->
+<input type="text" id="inputBox" placeholder="Enter topic or keyword" style="width:300px; padding:8px;" />
+
+<br><br>
+
+<button onclick="checkAPI()">Check API</button>
+<button onclick="generateBlog()">Generate Blog</button>
+<button onclick="getKeywords()">Get Keywords</button>
+
+<pre id="output"></pre>
+
+<script>
+async function login() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const res = await fetch(`${BASE_URL}/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email, password })
+  });
+
+  const data = await res.json();
+
+  localStorage.setItem("apiKey", data.api_key);
+
+  alert("Login successful");
+}
+
+  // store API key
+  localStorage.setItem("apiKey", data.api_key);
+
+  alert("Login successful");
+}
+
+
+const BASE_URL = "https://fiaz26seo-saas-production.up.railway.app";
+
+function getInput() {
+  return document.getElementById("inputBox").value;
+}
+
+function getApiKey() {
+  return localStorage.getItem("apiKey");
+}
+
+async function generateBlog() {
+  const topic = getInput();
+  const res = await fetch(`${BASE_URL}/ai/blog?topic=${topic}`);
+  const data = await res.json();
+  document.getElementById("output").innerText = JSON.stringify(data, null, 2);
+}
+
+async function getKeywords() {
+  const keyword = getInput();
+  const res = await fetch(`${BASE_URL}/ai/keywords?query=${keyword}`);
+  const data = await res.json();
+  document.getElementById("output").innerText = JSON.stringify(data, null, 2);
+}
+
+</script>
+
+</body>
 </html>
