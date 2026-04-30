@@ -26,19 +26,18 @@ def create_token(username: str):
     )
 
 
-@router.post("/signup")
-def signup(username: str, password: str, db: Session = Depends(get_db)):
-    existing = db.query(User).filter(User.username == username).first()
+from pydantic import BaseModel
+from fastapi import APIRouter
 
-    if existing:
-        raise HTTPException(status_code=400, detail="User already exists")
+router = APIRouter()
 
-    user = User(username=username, password=password)
-    db.add(user)
-    db.commit()
+class SignupRequest(BaseModel):
+    username: str
+    password: str
 
-    return {"message": "User created"}
-
+@router.post("/auth/signup")
+def signup(data: SignupRequest):
+    return {"api_key": create_api_key(data.username)}
 
 @router.post("/login")
 def login(username: str, password: str, db: Session = Depends(get_db)):
@@ -62,7 +61,8 @@ def generate_key(username: str):
     return {"api_key": create_api_key(username)}
 
 
-from backend.admin import upgrade_user_plan
+from backend.admin import upgrade_user_plan0
+
 
 
 @router.post("/upgrade")
