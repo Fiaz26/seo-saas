@@ -7,7 +7,7 @@ export default function App() {
   const [topic, setTopic] = useState("");
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
-
+return <Dashboard />;
   const generateBlog = async () => {
     if (!topic) {
       alert("Enter a topic");
@@ -55,4 +55,4 @@ export default function App() {
       </pre>
     </div>
   );
-}
+)
