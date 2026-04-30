@@ -12,10 +12,13 @@ export default function App() {
 
   const handleSignup = async () => {
     try {
-      await axios.post(`${API}/auth/signup`, {
+      const res = await axios.post(`${API}/auth/signup`, {
         username,
         password,
       });
+
+      // IMPORTANT: store API key
+      localStorage.setItem("apiKey", res.data.api_key);
 
       alert("Signup successful");
     } catch (err) {
@@ -30,12 +33,18 @@ export default function App() {
     try {
       setLoading(true);
 
+      const apiKey = localStorage.getItem("apiKey");
+
       const res = await axios.get(`${API}/ai/blog`, {
         params: { topic },
+        headers: {
+          "x-api-key": apiKey,
+        },
       });
 
       setResult(JSON.stringify(res.data, null, 2));
     } catch (err) {
+      console.error(err);
       alert("API Error");
     } finally {
       setLoading(false);
@@ -43,7 +52,7 @@ export default function App() {
   };
 
   return (
-    <div style={{ padding: 20, fontFamily: "Arial" }}>
+    <div style={{ padding: "20px", fontFamily: "Arial" }}>
       <h1>SEO SaaS WORKING</h1>
 
       <h2>Signup</h2>
@@ -73,7 +82,7 @@ export default function App() {
       />
 
       <button onClick={generateBlog}>
-        {loading ? "Loading..." : "Generate"}
+        {loading ? "Loading..." : "Generate Blog"}
       </button>
 
       <pre>{result}</pre>
