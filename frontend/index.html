@@ -1,78 +1,14 @@
-
-
-
-
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SEO SaaS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
 
-<div id="root"></div>
-<script type="module" src="/src/main.jsx"></script><script type="module" src="/src/main.jsx"></script>
-<head>
-  <title>SEO SaaS AI Engine</title>
-</head>
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
-</body>
+  <body>
+    <div id="root"></div>
 
-<script>
-
-async function login() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-
-  const res = await fetch(`${BASE_URL}/auth/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ email, password })
-  });
-
-  const data = await res.json();
-
-  localStorage.setItem("apiKey", data.api_key);
-
-  alert("Login successful");
-}
-<div id="root"></div>
-<script type="module" src="/src/main.jsx"></script>
-
-  // store API key
-  localStorage.setItem("apiKey", data.api_key);
-
-  alert("Login successful")
-const BASE_URL = "https://fiaz26seo-saas-production.up.railway.app";
-
-function getInput() {
-  return document.getElementById("inputBox")
-function getApiKey() {
-  return localStorage.getItem("apiKey");
-}
-
-async function generateBlog() {
-  const topic = getInput();
-  const res = await fetch(`${BASE_URL}/ai/blog?topic=${topic}`, {
-  headers: {
-    "x-api-key": localStorage.getItem("apiKey")
-  }
-})
-  const data = await res.json();
-  document.getElementById("output").innerText = JSON.stringify(data, null, 2);
-}
-
-async function getKeywords() {
-  const keyword = getInput();
-  const res = await fetch(`${BASE_URL}/ai/keywords?topic=${topic}`, {
-  headers: {
-    "x-api-key": localStorage.getItem("apiKey")
-  }
-})
-  const data = await res.json();
-  document.getElementById("output").innerText = JSON.stringify(data, null, 2);
-}
-
-
-</body>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
