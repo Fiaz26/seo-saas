@@ -35,6 +35,8 @@
 <pre id="output"></pre>
 
 <script>
+
+<script type="module" src="/src/main.jsx"></script>
 async function login() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
@@ -90,8 +92,6 @@ async function getKeywords() {
   document.getElementById("output").innerText = JSON.stringify(data, null, 2);
 }
 
-<script type="module" src="/src/main.jsx"></script>⅞
-</script>
 
 </body>
 </html>
